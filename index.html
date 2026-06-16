@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator</title>
+
+    <style>
+
+        /* Reset Default Styles */
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Body Styling */
+        body{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+        }
+
+        /* Calculator Box */
+        .calculator{
+            background-color: #222;
+            padding: 20px;
+            border-radius: 15px;
+            width: 320px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Display Screen */
+        #display{
+            width: 100%;
+            height: 60px;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 28px;
+            text-align: right;
+            background: white;
+        }
+
+        /* Buttons Grid */
+        .buttons{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        /* All Buttons */
+        button{
+            padding: 18px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover{
+            transform: scale(1.05);
+        }
+
+        /* Number Buttons */
+        .number{
+            background-color: #f1f1f1;
+        }
+
+        /* Operator Buttons */
+        .operator{
+            background-color: orange;
+            color: white;
+        }
+
+        /* Equal Button */
+        .equal{
+            background-color: green;
+            color: white;
+            grid-column: span 2;
+        }
+
+        /* Clear Button */
+        .clear{
+            background-color: red;
+            color: white;
+        }
+
+        /* Delete Button */
+        .delete{
+            background-color: #555;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Calculator Container -->
+    <div class="calculator">
+
+        <!-- Display Screen -->
+        <input type="text" id="display" disabled>
+
+        <!-- Buttons -->
+        <div class="buttons">
+
+            <button class="clear">C</button>
+            <button class="delete">DEL</button>
+            <button class="operator">/</button>
+            <button class="operator">*</button>
+
+            <button class="number">7</button>
+            <button class="number">8</button>
+            <button class="number">9</button>
+            <button class="operator">-</button>
+
+            <button class="number">4</button>
+            <button class="number">5</button>
+            <button class="number">6</button>
+            <button class="operator">+</button>
+
+            <button class="number">1</button>
+            <button class="number">2</button>
+            <button class="number">3</button>
+            <button class="number">0</button>
+
+            <button class="number">.</button>
+            <button class="equal">=</button>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        // Select Display
+        const display = document.getElementById("display");
+
+        // Select All Buttons
+        const buttons = document.querySelectorAll("button");
+
+        // Add Event Listener to Every Button
+        buttons.forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                const value = button.textContent;
+
+                // Clear Display
+                if(value === "C"){
+                    display.value = "";
+                }
+
+                // Delete Last Character
+                else if(value === "DEL"){
+                    display.value = display.value.slice(0, -1);
+                }
+
+                // Calculate Result
+                else if(value === "="){
+
+                    try{
+                        display.value = eval(display.value);
+                    }
+                    catch{
+                        display.value = "Error";
+                    }
+
+                }
+
+                // Add Values to Display
+                else{
+                    display.value += value;
+                }
+
+            });
+
+        });
+
+    </script>
+
+</body>
+</html>
